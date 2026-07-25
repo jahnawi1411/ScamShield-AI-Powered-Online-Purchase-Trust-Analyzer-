@@ -12,12 +12,21 @@ import 'screens/home/home_screen.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  // Load .env file
-  await dotenv.load(fileName: ".env");
+  try {
+    await dotenv.load(fileName: ".env");
+    debugPrint("✅ .env loaded successfully");
+  } catch (e) {
+    debugPrint("❌ Error loading .env: $e");
+  }
 
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-  );
+  try {
+    await Firebase.initializeApp(
+      options: DefaultFirebaseOptions.currentPlatform,
+    );
+    debugPrint("✅ Firebase initialized successfully");
+  } catch (e) {
+    debugPrint("❌ Firebase initialization failed: $e");
+  }
 
   runApp(const ScamShieldApp());
 }
@@ -55,6 +64,10 @@ class AuthWrapper extends StatelessWidget {
     return StreamBuilder<User?>(
       stream: FirebaseAuth.instance.authStateChanges(),
       builder: (context, snapshot) {
+        debugPrint(
+          "Auth State -> Connection: ${snapshot.connectionState}, User: ${snapshot.data?.uid}",
+        );
+
         // Loading state
         if (snapshot.connectionState == ConnectionState.waiting) {
           return const Scaffold(
@@ -81,12 +94,26 @@ class AuthWrapper extends StatelessWidget {
           );
         }
 
+        // Error state
+        if (snapshot.hasError) {
+          return Scaffold(
+            body: Center(
+              child: Text(
+                'Authentication Error:\n${snapshot.error}',
+                textAlign: TextAlign.center,
+              ),
+            ),
+          );
+        }
+
         // Not logged in
         if (snapshot.data == null) {
+          debugPrint("➡️ User not logged in");
           return const LoginScreen();
         }
 
         // Logged in
+        debugPrint("➡️ User logged in");
         return const HomeScreen();
       },
     );
