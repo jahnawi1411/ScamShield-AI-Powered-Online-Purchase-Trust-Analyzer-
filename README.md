@@ -1,11 +1,6 @@
 # 🛡️ ScamShield
 ### AI-Powered Online Purchase Trust Analyzer
 
-![Flutter](C:\FlutterProjects\scamshield\image\1.png)
-![Firebase](C:\FlutterProjects\scamshield\image\2.png)
-![Groq](C:\FlutterProjects\scamshield\image\3.png)
-![Dart](C:\FlutterProjects\scamshield\image\4.png)
-
 > **Shop Safe. Shop Smart.** — ScamShield helps you verify whether an online product is trustworthy before you spend your money.
 
 ---
