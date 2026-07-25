@@ -1,9 +1,9 @@
 import 'dart:convert';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
 
 class GeminiService {
-  final String _apiKey = 'GROQ_API_KEY'; // paste gsk_... key here
-
+  final String _apiKey = dotenv.env['GROQ_API_KEY']!; 
   Future<Map<String, dynamic>> analyzeProduct({
     required String productName,
     required String productUrl,

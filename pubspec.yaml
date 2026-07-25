@@ -11,6 +11,7 @@ dependencies:
   flutter:
     sdk: flutter
 
+
   cupertino_icons: ^1.0.8
   
   # Firebase
@@ -31,6 +32,7 @@ dependencies:
   
   # HTTP for Groq API
   http: ^1.2.0
+  flutter_dotenv: ^6.0.1
 
 dev_dependencies:
   flutter_test:
